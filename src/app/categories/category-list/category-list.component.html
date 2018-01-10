@@ -1,3 +1,20 @@
-<p>
-  category-list works!
-</p>
+<div class="row">
+  <div class="">
+    <h2>Category</h2>
+    <button class="btn btn-warning" (click)="createNewCategory()">New</button>
+    <div>
+
+      <ul class="list-group col-md-5">
+        <li class="list-group-item" *ngFor="let category of categories" (click)="selectCategory(category)" [class.active]="category === selectedCategory">
+          {{category.name}}
+        </li>
+      </ul>
+
+      <div class="col-md-5">
+        <category-details [category]="selectedCategory" [createHandler]="addCategory" [updateHandler]="updateCategory" [deleteHandler]="deleteCategory">
+        </category-details>
+      </div>
+    </div>
+  </div>
+
+</div>

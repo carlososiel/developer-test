@@ -26,7 +26,7 @@ export class CategoryService {
   }
 
   // delete("/api/category/:id") 
-  deleteCategory(categoryId: string): Promise<void | String> {
+  deleteCategory(categoryId: String): Promise<void | String> {
     return this.http.delete(this.categoryApiUrl + '/' + categoryId)
       .toPromise()
       .then(response => response.json() as String)

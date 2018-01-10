@@ -1,11 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { CategoryDetailsComponent } from './categories/category-details/category-details.component';
 import { CategoryListComponent } from './categories/category-list/category-list.component';
+import { RouterModule, Routes } from '@angular/router';
 
+const appRoutes: Routes = [
+  { path: 'categories', component: CategoryListComponent },  
+  
+];
 
 @NgModule({
   declarations: [
@@ -14,7 +19,13 @@ import { CategoryListComponent } from './categories/category-list/category-list.
     CategoryListComponent
   ],
   imports: [
-    BrowserModule
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
+    BrowserModule,
+    FormsModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

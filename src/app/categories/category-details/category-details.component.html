@@ -1,3 +1,17 @@
-<p>
-  category-details works!
-</p>
+<div *ngIf="category" class="row">
+  <div class="col-md-12">
+    <h2 *ngIf="category._id">Category Details</h2>
+    <h2 *ngIf="!category._id">New Category</h2>
+  </div>
+</div>
+<div *ngIf="category" class="row">
+  <form class="col-md-12">
+    <div class="form-group">
+      <label for="category-name">Name</label>
+      <input class="form-control" name="category-name" [(ngModel)]="category.name" placeholder="Name"/>
+    </div>   
+    <button class="btn btn-primary" *ngIf="!category._id" (click)="createCategory(category)">Create</button>
+    <button class="btn btn-info" *ngIf="category._id" (click)="updateCategory(category)">Update</button>
+    <button class="btn btn-danger" *ngIf="category._id" (click)="deleteCategory(category._id)">Delete</button>
+  </form>
+</div>
