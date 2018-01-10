@@ -20,12 +20,12 @@ router.route('/').post(function (req, res) {
 
         var c = new category();
         c.name = req.body.name;
-        c.save(function (err) {
+        c.save(function (err,doc) {
             if (err) {
                 res.send(err);
             }
             console.log("added");
-            res.send({ message: 'Category Created !' })
+            res.send(doc)
         })
     }
 });
