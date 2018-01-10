@@ -10,11 +10,15 @@ import { AuthorDetailsComponent } from './authors/author-details/author-details.
 import { AuthorListComponent } from './authors/author-list/author-list.component';
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BookDetailsComponent } from './book/book-details/book-details.component';
-import { MatToolbarModule, MatButtonModule, MatGridListModule, MatListModule, MatFormFieldModule, MatInputModule, MatIconModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatGridListModule, MatListModule, MatFormFieldModule, MatInputModule, MatIconModule, MatSelectModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 const appRoutes: Routes = [
   { path: 'categories', component: CategoryListComponent },  
   { path: 'authors', component: AuthorListComponent },  
-  { path: 'books', component: BookListComponent },  
+  { path: 'books', component: BookListComponent }, 
+  { path: '',   redirectTo: '/books', pathMatch: 'full' }, 
+  { path: '**',   redirectTo: '/books', pathMatch: 'full' }, 
   
 ];
 
@@ -42,7 +46,9 @@ const appRoutes: Routes = [
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

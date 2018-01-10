@@ -1,19 +1,23 @@
-<div class="row">
-  <div class="">
-    <h2>Books</h2>
-    <button class="btn btn-warning" (click)="createNewBook()">New</button>
-  </div>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <h2 class="title">Books
+    <button mat-button color="primary" (click)="createNewBook()">New</button>
+  </h2>
 
-  <ul class="list-group col-md-5">
-    <li class="list-group-item" *ngFor="let book of books" (click)="selectBook(book)" [class.active]="book === selectedBook">
-      {{book.name }}
-      
-    </li>
-  </ul>
+  <mat-grid-tile>
+    <mat-list>
+      <mat-list-item class="list-group-item" *ngFor="let book of books" (click)="selectBook(book)" [class.active]="book === selectedBook">
+        <mat-icon mat-list-icon>book</mat-icon>
 
-  <div class="col-md-5">
+        {{book.name }}
+
+
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
     <book-details [book]="selectedBook" [createHandler]="addBook" [updateHandler]="updateBook" [deleteHandler]="deleteBook">
     </book-details>
-  </div>
+  </mat-grid-tile>
 
-</div>
+</mat-grid-list>
