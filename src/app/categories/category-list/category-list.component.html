@@ -1,0 +1,23 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+
+  <h2 class="title">Categories
+    <button mat-button color="primary" (click)="createNewCategory()">New</button>
+  </h2>
+
+  <mat-grid-tile>
+    <mat-list>
+      <mat-list-item *ngFor="let category of categories" (click)="selectCategory(category)" [class.active]="category === selectedCategory">
+        <mat-icon mat-list-icon>bookmark</mat-icon>
+        {{category.name}}
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <category-details [category]="selectedCategory" [createHandler]="addCategory" [updateHandler]="updateCategory" [deleteHandler]="deleteCategory">
+    </category-details>
+  </mat-grid-tile>
+
+
+
+</mat-grid-list>
