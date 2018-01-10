@@ -1,0 +1,22 @@
+<div *ngIf="author" class="row">
+  <div class="col-md-12">
+    <h2 *ngIf="author._id">Author Details</h2>
+    <h2 *ngIf="!author._id">New Author</h2>
+  </div>
+</div>
+<div *ngIf="author" class="row">
+  <form class="form-container">
+    <mat-form-field class="form-group">
+      <input matInput name="author-first-name" [(ngModel)]="author.first_name" placeholder="First Name" />
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+      <input matInput name="author-last-name" [(ngModel)]="author.last_name" placeholder="Last Name" />
+    </mat-form-field>
+    <div class="button-row">
+      <button mat-raised-button color="primary" *ngIf="!author._id" (click)="createAuthor(author)">Create</button>
+      <button mat-raised-button color="accent" *ngIf="author._id" (click)="updateAuthor(author)">Update</button>
+      <button mat-raised-button color="warn" *ngIf="author._id" (click)="deleteAuthor(author._id)">Delete</button>
+    </div>
+  </form>
+</div>

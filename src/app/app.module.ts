@@ -6,9 +6,19 @@ import { AppComponent } from './app.component';
 import { CategoryDetailsComponent } from './categories/category-details/category-details.component';
 import { CategoryListComponent } from './categories/category-list/category-list.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthorDetailsComponent } from './authors/author-details/author-details.component';
+import { AuthorListComponent } from './authors/author-list/author-list.component';
+import { BookListComponent } from './book/book-list/book-list.component';
+import { BookDetailsComponent } from './book/book-details/book-details.component';
+import { MatToolbarModule, MatButtonModule, MatGridListModule, MatListModule, MatFormFieldModule, MatInputModule, MatIconModule, MatSelectModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: 'categories', component: CategoryListComponent },  
+  { path: 'authors', component: AuthorListComponent },  
+  { path: 'books', component: BookListComponent }, 
+  { path: '',   redirectTo: '/books', pathMatch: 'full' }, 
+  { path: '**',   redirectTo: '/books', pathMatch: 'full' }, 
   
 ];
 
@@ -16,7 +26,11 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     CategoryDetailsComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    AuthorDetailsComponent,
+    AuthorListComponent,
+    BookListComponent,
+    BookDetailsComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -25,7 +39,16 @@ const appRoutes: Routes = [
     ),
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

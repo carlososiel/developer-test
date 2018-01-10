@@ -1,11 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
-<div class="container">
+<mat-toolbar color="primary">
+  <a mat-button routerLink="/">Library</a>
+  <a mat-button routerLink="/books">Books</a>
+  <a mat-button routerLink="/categories">Categories</a>
+  <a mat-button routerLink="/authors">Authors</a>
+</mat-toolbar>
+
+<div>
   <router-outlet></router-outlet>
 </div>
-
-

@@ -1,0 +1,32 @@
+<div *ngIf="book" class="row">
+  <div class="col-md-12">
+    <h2 *ngIf="book._id">Book Details</h2>
+    <h2 *ngIf="!book._id">New Book</h2>
+  </div>
+</div>
+<div *ngIf="book" class="row">
+  <form class="form-container">
+
+    <mat-form-field class="form-group">
+      <input matInput name="book-name" [(ngModel)]="book.name" placeholder="Name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select name="book-category" [(ngModel)]="book.category" placeholder="Category">
+        <mat-option *ngFor="let x of categories" [value]="x._id">{{x.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select name="book-author" [(ngModel)]="book.author" placeholder="Author">
+        <mat-option *ngFor="let x of authors" [value]="x._id">{{x.first_name}} {{x.last_name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="button-row">
+      <button mat-raised-button color="primary" *ngIf="!book._id" (click)="createBook(book)">Create</button>
+      <button mat-raised-button color="accent" *ngIf="book._id" (click)="updateBook(book)">Update</button>
+      <button mat-raised-button color="warn" *ngIf="book._id" (click)="deleteBook(book._id)">Delete</button>
+    </div>
+  </form>
+</div>

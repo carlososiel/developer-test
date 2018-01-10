@@ -20,11 +20,11 @@ router.route('/').post(function (req, res) {
         a.name = req.body.name;
         a.author = req.body.author;
         a.category = req.body.category;
-        a.save(function (err) {
+        a.save(function (err, doc) {
             if (err) {
                 res.send(err);
             }
-            res.send({ message: 'Book Created !' })
+            res.send(doc)
         })
     }
 });
@@ -51,7 +51,7 @@ router.route('/:book_id').get(function (req, res) {
 router.route('/:book_id').put(function (req, res) {
     const ret = Joi.validate(req.body, bookValidator, {
         // return an error if body has an unrecognised property
-        allowUnknown: false,
+        allowUnknown: true,
         // return all errors a payload contains, not just the first one Joi finds
         abortEarly: false
     });

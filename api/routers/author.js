@@ -19,11 +19,11 @@ router.route('/').post(function (req, res) {
         var a = new author();
         a.first_name = req.body.first_name;
         a.last_name = req.body.last_name;
-        a.save(function (err) {
+        a.save(function (err,doc) {
             if (err) {
                 res.send(err);
             }
-            res.send({ message: 'Author Created !' })
+            res.send(doc)
         })
     }
 });
@@ -50,7 +50,7 @@ router.route('/:author_id').get(function (req, res) {
 router.route('/:author_id').put(function (req, res) {
     const ret = Joi.validate(req.body, authorValidator, {
         // return an error if body has an unrecognised property
-        allowUnknown: false,
+        allowUnknown: true,
         // return all errors a payload contains, not just the first one Joi finds
         abortEarly: false
     });
