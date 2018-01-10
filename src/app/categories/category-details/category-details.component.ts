@@ -35,7 +35,7 @@ export class CategoryDetailsComponent implements OnInit {
   updateCategory(category: Category) {
     this.categoryService.updateCategory(category)
       .then((updateCategory: Category) => {
-        this.createHandler(updateCategory)
+        this.updateHandler(updateCategory)
       })
   }
   deleteCategory(categoryId: String) {

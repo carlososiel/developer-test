@@ -1,0 +1,21 @@
+<div *ngIf="author" class="row">
+  <div class="col-md-12">
+    <h2 *ngIf="author._id">Author Details</h2>
+    <h2 *ngIf="!author._id">New Author</h2>
+  </div>
+</div>
+<div *ngIf="author" class="row">
+  <form class="col-md-12">
+    <div class="form-group">
+      <label for="author-first-name">First Name</label>
+      <input class="form-control" name="author-first-name" [(ngModel)]="author.first_name" placeholder="First Name"/>
+    </div>   
+    <div class="form-group">
+      <label for="author-last-name">Last Name</label>
+      <input class="form-control" name="author-last-name" [(ngModel)]="author.last_name" placeholder="Last Name"/>
+    </div>   
+    <button class="btn btn-primary" *ngIf="!author._id" (click)="createAuthor(author)">Create</button>
+    <button class="btn btn-info" *ngIf="author._id" (click)="updateAuthor(author)">Update</button>
+    <button class="btn btn-danger" *ngIf="author._id" (click)="deleteAuthor(author._id)">Delete</button>
+  </form>
+</div>

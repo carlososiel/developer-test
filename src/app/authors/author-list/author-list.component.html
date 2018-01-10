@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="">
+    <h2>Authors</h2>
+    <button class="btn btn-warning" (click)="createNewAuthor()">New</button>
+  </div>
+
+  <ul class="list-group col-md-5">
+    <li class="list-group-item" *ngFor="let author of authors" (click)="selectAuthor(author)" [class.active]="author === selectedAuthor">
+      {{author.first_name }}
+      {{author.last_name }}
+    </li>
+
+  </ul>
+
+  <div class="col-md-5">
+    <author-details [author]="selectedAuthor" [createHandler]="addAuthor" [updateHandler]="updateAuthor" [deleteHandler]="deleteAuthor">
+    </author-details>
+
+
+  </div>
+
+</div>
