@@ -15,6 +15,7 @@ var book = require('./models/book');
 //Routers
 var categoryRouter = require('./routers/category') 
 var authorRouter = require('./routers/author') 
+var bookRouter = require('./routers/book') 
 
 //Connect to database
 mongoose.connect('mongodb://mongo:27017/library',{
@@ -31,5 +32,6 @@ mongoose.connect('mongodb://mongo:27017/library',{
 app.use(cors());
 app.use('/api/category', categoryRouter);
 app.use('/api/author', authorRouter);
+app.use('/api/book', bookRouter);
 app.listen(port);
 console.log('LIBRARY REST API is runnning on port: '+ port);
