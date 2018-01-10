@@ -1,0 +1,24 @@
+form {
+  padding: 20px 20px 20px 50px;
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+}
+
+form button {
+  margin-top: 20px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: auto;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mat-column-select {
+  overflow: initial;
+}

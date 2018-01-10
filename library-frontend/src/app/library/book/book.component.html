@@ -1,0 +1,115 @@
+<div class="example-container mat-elevation-z8">
+  <div class="table-space">
+    <mat-table #table [dataSource]="dataSource">
+      <!-- Select Column -->
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef> Select to update</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="onSelectionChange($event, row)"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element._id}}</mat-cell>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Title</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.title}}</mat-cell>
+      </ng-container>
+
+      <!-- Author Column -->
+      <ng-container matColumnDef="author">
+        <mat-header-cell *matHeaderCellDef> Author</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.author.last_name}}, {{element.author.first_name}}</mat-cell>
+      </ng-container>
+
+      <!-- Category Column -->
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef> Category</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.category.name}}</mat-cell>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-button color="warn" (click)="remove(row._id)">
+            Delete
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+  <form #DataForm="ngForm" (ngSubmit)="save(DataForm)">
+    <h5 *ngIf="selection.hasValue()">Update selected Book</h5>
+    <h5 *ngIf="!selection.hasValue()">Add new Book</h5>
+
+    <mat-form-field>
+      <input matInput
+             name="title"
+             type="text"
+             placeholder="Title"
+             [(ngModel)]="data.title"
+             #title="ngModel"
+             required>
+      <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">
+        <span *ngIf="title.errors.required">
+          You must enter a value
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Author"
+                  name="author"
+                  #author="ngModel"
+                  [(ngModel)]="data.author"
+                  required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let author of authors" [value]="author._id">
+          {{author.last_name}}, {{author.first_name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="author.invalid && (author.dirty || author.touched)">
+        <span *ngIf="author.errors.required">
+          You must select a value
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Category"
+                  name="category"
+                  #category="ngModel"
+                  [(ngModel)]="data.category"
+                  required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category._id">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="category.invalid && (category.dirty || category.touched)">
+        <span *ngIf="category.errors.required">
+          You must select a value
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button
+            color="primary"
+            type="submit">
+      Save
+    </button>
+  </form>
+</div>
