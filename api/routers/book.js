@@ -20,11 +20,11 @@ router.route('/').post(function (req, res) {
         a.name = req.body.name;
         a.author = req.body.author;
         a.category = req.body.category;
-        a.save(function (err) {
+        a.save(function (err, doc) {
             if (err) {
                 res.send(err);
             }
-            res.send({ message: 'Book Created !' })
+            res.send(doc)
         })
     }
 });

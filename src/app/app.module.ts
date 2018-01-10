@@ -8,10 +8,13 @@ import { CategoryListComponent } from './categories/category-list/category-list.
 import { RouterModule, Routes } from '@angular/router';
 import { AuthorDetailsComponent } from './authors/author-details/author-details.component';
 import { AuthorListComponent } from './authors/author-list/author-list.component';
+import { BookListComponent } from './book/book-list/book-list.component';
+import { BookDetailsComponent } from './book/book-details/book-details.component';
 
 const appRoutes: Routes = [
   { path: 'categories', component: CategoryListComponent },  
   { path: 'authors', component: AuthorListComponent },  
+  { path: 'books', component: BookListComponent },  
   
 ];
 
@@ -21,7 +24,9 @@ const appRoutes: Routes = [
     CategoryDetailsComponent,
     CategoryListComponent,
     AuthorDetailsComponent,
-    AuthorListComponent
+    AuthorListComponent,
+    BookListComponent,
+    BookDetailsComponent
   ],
   imports: [
     RouterModule.forRoot(

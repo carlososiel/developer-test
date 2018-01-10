@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="">
+    <h2>Books</h2>
+    <button class="btn btn-warning" (click)="createNewBook()">New</button>
+  </div>
+
+  <ul class="list-group col-md-5">
+    <li class="list-group-item" *ngFor="let book of books" (click)="selectBook(book)" [class.active]="book === selectedBook">
+      {{book.name }}
+      
+    </li>
+  </ul>
+
+  <div class="col-md-5">
+    <book-details [book]="selectedBook" [createHandler]="addBook" [updateHandler]="updateBook" [deleteHandler]="deleteBook">
+    </book-details>
+  </div>
+
+</div>
