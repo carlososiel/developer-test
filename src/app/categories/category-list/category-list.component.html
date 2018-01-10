@@ -1,20 +1,23 @@
-<div class="row">
-  <div class="">
-    <h2>Categories</h2>
-    <button class="btn btn-warning" (click)="createNewCategory()">New</button>
+<mat-grid-list cols="2" rowHeight="2:1">
 
-  </div>
-  <ul class="list-group col-md-5">
-    <li class="list-group-item" *ngFor="let category of categories" (click)="selectCategory(category)" [class.active]="category === selectedCategory">
-      {{category.name}}
-    </li>
-  </ul>
+  <h2 class="title">Categories
+    <button mat-button color="primary" (click)="createNewCategory()">New</button>
+  </h2>
 
-  <div class="col-md-5">
+  <mat-grid-tile>
+    <mat-list>
+      <mat-list-item *ngFor="let category of categories" (click)="selectCategory(category)" [class.active]="category === selectedCategory">
+        <mat-icon mat-list-icon>bookmark</mat-icon>
+        {{category.name}}
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
     <category-details [category]="selectedCategory" [createHandler]="addCategory" [updateHandler]="updateCategory" [deleteHandler]="deleteCategory">
     </category-details>
-  </div>
+  </mat-grid-tile>
 
 
 
-</div>
+</mat-grid-list>
