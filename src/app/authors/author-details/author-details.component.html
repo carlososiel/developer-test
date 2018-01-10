@@ -5,17 +5,18 @@
   </div>
 </div>
 <div *ngIf="author" class="row">
-  <form class="col-md-12">
-    <div class="form-group">
-      <label for="author-first-name">First Name</label>
-      <input class="form-control" name="author-first-name" [(ngModel)]="author.first_name" placeholder="First Name"/>
-    </div>   
-    <div class="form-group">
-      <label for="author-last-name">Last Name</label>
-      <input class="form-control" name="author-last-name" [(ngModel)]="author.last_name" placeholder="Last Name"/>
-    </div>   
-    <button class="btn btn-primary" *ngIf="!author._id" (click)="createAuthor(author)">Create</button>
-    <button class="btn btn-info" *ngIf="author._id" (click)="updateAuthor(author)">Update</button>
-    <button class="btn btn-danger" *ngIf="author._id" (click)="deleteAuthor(author._id)">Delete</button>
+  <form class="form-container">
+    <mat-form-field class="form-group">
+      <input matInput name="author-first-name" [(ngModel)]="author.first_name" placeholder="First Name" />
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+      <input matInput name="author-last-name" [(ngModel)]="author.last_name" placeholder="Last Name" />
+    </mat-form-field>
+    <div class="button-row">
+      <button mat-raised-button color="primary" *ngIf="!author._id" (click)="createAuthor(author)">Create</button>
+      <button mat-raised-button color="accent" *ngIf="author._id" (click)="updateAuthor(author)">Update</button>
+      <button mat-raised-button color="warn" *ngIf="author._id" (click)="deleteAuthor(author._id)">Delete</button>
+    </div>
   </form>
 </div>

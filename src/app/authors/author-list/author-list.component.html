@@ -1,22 +1,19 @@
-<div class="row">
-  <div class="">
-    <h2>Authors</h2>
-    <button class="btn btn-warning" (click)="createNewAuthor()">New</button>
-  </div>
+<mat-grid-list cols="2" rowHeight="2:1">
+    <h2 class="title">Authors
+        <button mat-button color="primary" (click)="createNewAuthor()">New</button>
+    </h2>
+  <mat-grid-tile>
+    <mat-list>
+      <mat-list-item class="list-group-item" *ngFor="let author of authors" (click)="selectAuthor(author)" [class.active]="author === selectedAuthor">
+          <mat-icon mat-list-icon>account_circle</mat-icon>
+        {{author.first_name }} {{author.last_name }}
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
 
-  <ul class="list-group col-md-5">
-    <li class="list-group-item" *ngFor="let author of authors" (click)="selectAuthor(author)" [class.active]="author === selectedAuthor">
-      {{author.first_name }}
-      {{author.last_name }}
-    </li>
-
-  </ul>
-
-  <div class="col-md-5">
+  <mat-grid-tile>
     <author-details [author]="selectedAuthor" [createHandler]="addAuthor" [updateHandler]="updateAuthor" [deleteHandler]="deleteAuthor">
     </author-details>
+  </mat-grid-tile>
 
-
-  </div>
-
-</div>
+</mat-grid-list>

@@ -10,7 +10,7 @@ import { AuthorDetailsComponent } from './authors/author-details/author-details.
 import { AuthorListComponent } from './authors/author-list/author-list.component';
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BookDetailsComponent } from './book/book-details/book-details.component';
-
+import { MatToolbarModule, MatButtonModule, MatGridListModule, MatListModule, MatFormFieldModule, MatInputModule, MatIconModule } from '@angular/material';
 const appRoutes: Routes = [
   { path: 'categories', component: CategoryListComponent },  
   { path: 'authors', component: AuthorListComponent },  
@@ -35,7 +35,14 @@ const appRoutes: Routes = [
     ),
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
