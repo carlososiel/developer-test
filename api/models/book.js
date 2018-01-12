@@ -20,5 +20,5 @@ module.exports = function (mongoose) {
         }
     }, {collection: 'user'});
 
-    return mongoose.model('book', BookSchema);
+    return mongoose.model('book', Book);
 };
