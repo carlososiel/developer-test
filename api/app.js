@@ -1,7 +1,6 @@
 var express = require('express');
 var cors = require('cors')
 var path = require('path');
-var logger = require('morgan');
 var bodyParser = require('body-parser');
 var http = require('http');
 
@@ -9,24 +8,27 @@ var app = express();
 /*
  * Use cross domain
  */
-app.use(cors())
+app.use(cors());
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/book', require('./routes/book'));
+app.use('/author', require('./routes/author'));
+app.use('/category', require('./routes/category'));
 /*
  * Set database connection
  */
 if (!global.hasOwnProperty('db')) {
     var mongoose = require('mongoose');
     mongoose.connect('mongodb://127.0.0.1/developer-test', {
-        useMongoClient: true,
+        useMongoClient: true
     });
     global.db = {
         mongoose: mongoose,
-        Book: require('./models/book')(mongoose)
+        Book: require('./models/book')(mongoose),
+        Author: require('./models/author')(mongoose),
+        Category: require('./models/category')(mongoose),
     };
 }
 

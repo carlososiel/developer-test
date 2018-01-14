@@ -18,7 +18,7 @@ module.exports = function (mongoose) {
             type: Object,
             require: true
         }
-    }, {collection: 'user'});
+    }, {collection: 'book'});
 
     return mongoose.model('book', BookSchema);
 };
