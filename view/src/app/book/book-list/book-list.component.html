@@ -1,0 +1,66 @@
+<div style="margin-bottom: 20px;">
+  <span class="ui header">
+    Books list
+  </span>
+  <button class="ui blue icon button right floated" routerLink="/book/add">
+    <i class="icon plus"></i>
+    Add book
+  </button>
+</div>
+<div style="margin-bottom: 20px;">
+  <form class="ui form">
+    <div class="field">
+      <div class="two fields">
+        <div class="field">
+          <label>Author</label>
+          <select name="author" class="ui dropdown" [(ngModel)]="author" (change)="search()">
+            <option value="">Seleccione...</option>
+            <option *ngFor="let author of authors" value="{{author._id}}">{{author.name}}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Category</label>
+          <select name="category" class="ui dropdown" [(ngModel)]="category"  (change)="search()">
+            <option value="">Seleccione...</option>
+            <option *ngFor="let category of categories" value="{{category._id}}">{{category.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<table class="ui celled table" *ngIf="books.length">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Author</th>
+    <th>Category</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let book of books">
+    <td>
+      {{book.name}}
+    </td>
+    <td>{{book.author.name}}</td>
+    <td>{{book.category.name}}</td>
+    <td class="collapsing">
+      <button class="ui icon button mini" [routerLink]="['/book/upd',book._id]">
+        <i class="edit icon"></i>
+      </button>
+      <button class="ui icon button mini red" (click)="delete(book)">
+        <i class="trash icon"></i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div class="ui segment" *ngIf="!books.length">
+  <p>
+    There are no books to show</p>
+</div>
+<app-modal-confirm
+  header="Delete book"
+  text="Do you really remove selected book?">
+</app-modal-confirm>

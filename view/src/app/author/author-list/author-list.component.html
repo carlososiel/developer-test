@@ -1,0 +1,38 @@
+<div style="margin-bottom: 20px;">
+  <span class="ui header">
+    Author list
+  </span>
+  <button class="ui blue icon button right floated" routerLink="/author/add">
+    <i class="icon plus"></i>
+    Add author
+  </button>
+</div>
+<table class="ui celled table" *ngIf="authors.length">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let author of authors">
+    <td>{{author.name}}</td>
+    <td class="collapsing">
+      <button class="ui icon button mini" [routerLink]="['/author/upd', author._id]">
+        <i class="edit icon"></i>
+      </button>
+      <button class="ui icon button mini red" (click)="delete(author)">
+        <i class="trash icon"></i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div class="ui segment" *ngIf="!authors.length">
+  <p>
+    There are no authors to show</p>
+</div>
+<app-modal-confirm
+  header="Delete author"
+  text="Do you really remove selected author?">
+</app-modal-confirm>
