@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
  * @return {boolean}
  */
 function Validator(firstname) {
-    if(firstname===undefined)
+    if(!firstname)
         return false;
     return firstname.length!=0;
 }

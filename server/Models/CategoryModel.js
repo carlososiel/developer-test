@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 function Validator(categoryname) {
-    if(categoryname===undefined)
+    if(!categoryname)
         return false;
     return categoryname.length!=0;
 }
