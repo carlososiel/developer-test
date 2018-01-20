@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <h1 class="page-header">Author List</h1>
+  <p>
+    <a [routerLink]="['/author-create']" class="btn btn-default btn-lg btn-primary">
+      New Author
+    </a>
+  </p>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Fist Name</th>
+      <th>Last Name</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let author of authors">
+      <td>{{ author.first_name }}</td>
+      <td>{{ author.last_name }}</td>
+      <td><a [routerLink]="['/author-details', author._id]">View</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
