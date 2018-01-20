@@ -3,5 +3,11 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongoose": "^5.0.0"
-  }
+  },
+  "name": "BookApp",
+  "version": "1.0.0",
+  "description": "Book test",
+  "main": "index.js",
+  "author": "Maylan Velazquez <maylanvn@gmail.com>",
+  "license": "MIT"
 }
