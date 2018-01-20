@@ -50,7 +50,7 @@ app.use(function(err, req, res, next) {
  // res.status(500).send(err);
   // render the error page
    res.status(err.status || 500);
-   res.send(err);
+   res.json(err);
 });
 
 module.exports = app;

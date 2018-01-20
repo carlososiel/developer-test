@@ -12,9 +12,10 @@ import {AuthorService} from '../author/author.service';
   encapsulation: ViewEncapsulation.None
 })
 export class BookCreateComponent implements OnInit {
-
+  err:{
+    published_year:""
+  };
   book: any = {
-
     title: '',
     published_year: '0000',
     description: '',
@@ -57,8 +58,8 @@ export class BookCreateComponent implements OnInit {
     this.bookService.createBook(this.book)
       .subscribe(res => {
           this.router.navigate(['/books']);
-        }, (err) => {
-          console.log(err);
+        }, (res) => {
+          this.err = res.json().errors;
         }
       );
   }

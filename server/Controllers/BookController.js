@@ -53,7 +53,7 @@ var BookController = function () {
     };
 
     var update = function(req,res,next){
-        Book.findByIdAndUpdate(req.params.id,req.body,function (err,boo) {
+        Book.findByIdAndUpdate(req.params.id,req.body,{new: true, runValidators: true},function (err,boo) {
             if(err)
                 return next(err);
             res.status(204).json(boo);

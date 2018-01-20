@@ -14,7 +14,9 @@ import {Observable} from 'rxjs/Observable';
   encapsulation: ViewEncapsulation.None
 })
 export class BookEditComponent implements OnInit {
-
+  err:{
+    published_year:""
+  };
   book: any = {
 
     title: '',
@@ -58,8 +60,8 @@ export class BookEditComponent implements OnInit {
     this.bookService.updateBook( id, this.book)
       .subscribe(res => {
           this.router.navigate(['/books']);
-        }, (err) => {
-          console.log(err);
+        }, (res) => {
+          this.err = res.json().errors;
         }
       );
   }
