@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header text-uppercase" id="name">{{book.title}}</h1>
+    </div>
+    <div class="col-md-12">
+      <h3>Description</h3>
+      <p id="description">{{book.description}}</p>
+      <h3>Published Year</h3>
+      <p id="year">{{book.published_year}}</p>
+      <h3>Category</h3>
+      <p id="category">{{category.name}}</p>
+      <h3>Author</h3>
+      <p id="author" class="text-uppercase">{{author.last_name}},<span class="text-muted text-lowercase">{{author.first_name}}</span></p>
+    </div>
+    <div class="well well-sm">
+      <a [routerLink]="['/book-edit', book._id]" class="btn btn-success">EDIT</a>
+      <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="container">
+<div class="row well">
+  <div class="col-md-12">
+    <h2 class="text-uppercase">{{author.last_name}},<span class="text-muted text-lowercase">{{author.first_name}}</span></h2>
+    <a [routerLink]="['/author-edit', author._id]" class="btn btn-success">EDIT</a>
+    <button class="btn btn-danger" type="button" (click)="deleteAuthor(author._id)">DELETE</button>
+  </div>
+</div>
+</div>

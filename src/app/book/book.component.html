@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <h1 class="page-header">Book List</h1>
+  <h3>
+    <a [routerLink]="['/book-create']" class="btn btn-default btn-lg btn-primary">
+      New Book
+    </a>
+    <button *ngIf="filterCategory || filterAuthor" (click)="resetFilter()" class="btn btn-default">Reset</button>
+  </h3>
+  <div *ngIf="books.length > 0" class="well well-lg">
+    <h3>Filter By</h3>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select id="category" class="form-control" [(ngModel)] = 'filterCategory' (change)="filterBook()" name="author" required>
+        <option value=""></option>
+        <option *ngFor="let category of categoryList" value="{{category._id}}">
+          {{category.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="author">Author</label>
+      <select id="author" class="form-control" [(ngModel)] = 'filterAuthor' (change)="filterBook()" name="author" required>
+        <option value=""></option>
+        <option *ngFor="let author of authorList" value="{{author._id}}">
+          {{author.last_name}}, {{author.first_name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <table class="table table-responsive table-hover">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Published year</th>
+        <th>Category</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books;">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author.first_name }} {{ book.author.last_name }}</td>
+        <td>{{ book.published_year }}</td>
+        <td>{{ book.category.name }}</td>
+        <td>
+          <a [routerLink]="['/book-details', book._id]">View</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

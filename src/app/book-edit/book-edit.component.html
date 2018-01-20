@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>Edit Book</h1>
+  <div class="row well">
+    <div class="col-md-6">
+      <form (ngSubmit)="updateBook(book._id)" #bookForm="ngForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input id="title" type="text" class="form-control" [(ngModel)]="book.title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <select id="author"  class="form-control" [(ngModel)]="book.author._id"   name="authorid" required>
+              <option *ngFor="let author of authorList" value="{{author._id}}">
+                {{author.last_name}}, {{author.first_name}}
+              </option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="published_year">Published Year</label>
+          <input id="published_year" type="number" class="form-control" [(ngModel)]="book.published_year" name="published_year" required>
+          <span *ngIf="err && err.published_year" class="text-danger">{{err.published_year.message}}</span>
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category"  class="form-control" [(ngModel)]="book.category._id"   name="categoryid" required>
+            <option *ngFor="let category of categoryList" value="{{category._id}}">
+              {{category.name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input id="description" type="text" class="form-control" [(ngModel)]="book.description" name="description">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
