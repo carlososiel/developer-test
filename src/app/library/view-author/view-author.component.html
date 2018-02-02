@@ -1,0 +1,43 @@
+<div class="creator-container">
+
+    <h3>View Author</h3>
+
+  <mat-card class="custom-card" *ngIf="author">
+
+      <mat-form-field class="full">
+        <input 
+        matInput 
+        placeholder="Name" 
+        [formControl]="nameControl"
+        [(ngModel)]="author.name"
+        required>
+        <mat-error *ngIf="nameControl.hasError('required')">Name can't be empty</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full" >
+        <input 
+        matInput 
+        placeholder="Last Name" 
+        [formControl]="lastNameControl"
+        [(ngModel)]="author.lastName" 
+        required>
+        <mat-error *ngIf="lastNameControl.hasError('required')">Last Name can't be empty</mat-error>
+      </mat-form-field>
+      
+      <mat-card-actions>
+          <button 
+            mat-button 
+            color="primary" 
+            (click)="update()"
+            [disabled]="!validForm()"> 
+            UPDATE 
+          </button>
+      </mat-card-actions>
+    
+  </mat-card>
+
+  <div *ngIf="!author">
+    <app-nothing></app-nothing>
+  </div>
+  
+</div>

@@ -1,0 +1,20 @@
+{
+  "mongoUrl": "mongodb://127.0.0.1/library",
+  "confDb": {
+    "db": "library",
+    "host": "127.0.0.1",
+    "port": "27017",
+    "username": "",
+    "password": "",
+    "autoReconnect": true,
+    "stringify": false,
+    "expireAfter": "300000"
+  },
+  "mongoseServer": {
+	  "auto_reconnect": true,
+    "poolSize": 50,
+    "socketOptions": {
+      "keepAlive": 1
+    }
+  }
+}

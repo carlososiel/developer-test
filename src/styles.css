@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+@media (min-width: 48em) {
+    .custom-margin-left {
+        margin-left: 1em;
+    }
+}
+
+body {
+    background:lightgray;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+
+.custom-toolbar{
+    box-sizing: content-box !important;
+}
+
+.custom-menu{
+    display: block;
+    position: absolute !important;
+    right: 5px;
+    height: 42px;
+    line-height: 42px !important;
+    font-family: "montserrat-regular", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+    color: rgba(255, 255, 255, 0.5) !important;
+    transition: all 0.3s ease-in-out !important;
+}
+.logo {
+    color: whitesmoke;
+}
+
+.custom-card{
+    margin-bottom: 1em;
+}
+
+.custom-card:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+}
+
+.row{
+    margin-left: 0 !important;
+}
+
+.full{
+    width: 100%;
+    flex: 0 1 auto;
+}

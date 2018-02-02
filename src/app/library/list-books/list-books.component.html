@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="full">
+        <app-book-filter class="full row component-margin-top"></app-book-filter> 
+    </div>
+</div>
+<div class="row">
+  <div class="col-xs-offset-1 custom-margin-left col-xs-10 col-md-6">
+      <app-create-book
+        (created)="createdBook($event)">
+      </app-create-book>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-offset-1 custom-margin-left">
+      <h3>Books list</h3>
+  </div>
+</div>
+<div class="row">
+  <div 
+  class="col-xs-10 col-sm-4 col-md-3 col-xs-offset-1 custom-margin-left" 
+  *ngFor="let book of (books ? books: []); let i = index">
+
+  <app-book-card
+    [book]="book"
+    (removed)="removeBook($event)">
+  </app-book-card>
+
+  </div>
+
+  <div *ngIf="books.length == 0">
+    <app-nothing></app-nothing>
+  </div>
+</div>

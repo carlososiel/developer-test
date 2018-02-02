@@ -1,0 +1,31 @@
+
+<div class="row">
+  <div class="col-xs-offset-1 custom-margin-left col-xs-10 col-md-6">
+      <app-create-author
+      (created)="createdAuthor($event)">
+      </app-create-author>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-offset-1 custom-margin-left">
+      <h3>Authors list</h3>
+  </div>
+</div>
+<div class="row">
+    <div 
+    class="col-xs-10 col-sm-4 col-md-3 col-xs-offset-1 custom-margin-left" 
+    *ngFor="let author of (authors ? authors: []); let i = index">
+
+      <app-author-card
+        [author]="author"
+        (removed)="removeAuthor($event)">
+      </app-author-card>
+  
+    </div>
+
+    <div *ngIf="authors.length == 0">
+      <app-nothing></app-nothing>
+    </div>
+</div>
+
+

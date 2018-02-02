@@ -1,0 +1,45 @@
+<div class="creator-container">
+
+    <h3>Insert a Category</h3>
+
+  <mat-card class="custom-card">
+
+      <mat-form-field class="full">
+        <input 
+        matInput 
+        placeholder="Name" 
+        [formControl]="nameControl"
+        [(ngModel)]="category.name"
+        (focus)="toggleForm(true)"
+        required>
+        <mat-error *ngIf="nameControl.hasError('required')">Name can't be empty</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full"  *ngIf="fullForm">
+        <input 
+        matInput 
+        placeholder="Description" 
+        [formControl]="descriptionControl"
+        [(ngModel)]="category.description"
+        required>
+        <mat-error *ngIf="descriptionControl.hasError('required')">Description can't be empty</mat-error>
+      </mat-form-field>
+      
+      <mat-card-actions *ngIf="fullForm">
+          <button 
+            mat-button 
+            color="primary" 
+            (click)="create()"
+            [disabled]="!validForm()"> 
+            CREATE 
+          </button>
+          <button 
+            mat-button 
+            (click)="cancel()"> 
+            CANCEL 
+          </button>
+      </mat-card-actions>
+    
+  </mat-card>
+  
+</div>

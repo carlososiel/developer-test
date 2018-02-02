@@ -1,0 +1,13 @@
+<mat-form-field class="full">
+
+  <mat-select placeholder="Author" [(value)]="author">
+    <mat-option [value]="" (click)="changeAuthor()">--</mat-option>
+    <mat-option 
+    *ngFor="let auth of authors" 
+    [value]="auth._id"
+    (click)="changeAuthor()">
+    {{auth.lastName}}, <strong>{{auth.name}}</strong>
+    </mat-option>
+  </mat-select>
+  
+</mat-form-field>
