@@ -1,0 +1,28 @@
+<div class="col-xs-offset-1 custom-margin-left col-xs-10 col-sm-5">
+  <app-book-category-filter  
+    [category]="category"
+    (categoryChanged)="changeCategory($event)">
+  </app-book-category-filter>
+</div>
+
+<div class="col-xs-offset-1 custom-margin-left col-xs-10 col-sm-5">
+  <app-book-author-filter
+    [author]="author"
+    (authorChanged)="changeAuthor($event)">
+  </app-book-author-filter>
+</div>
+
+<div class="col-xs-offset-1 custom-margin-left col-xs-10 col-sm-1">
+    <button 
+      class="custom-button full"
+      mat-button color="primary" 
+      (click)="navigate()">
+      FIND
+    </button>
+</div>
+  
+
+
+
+  
+
