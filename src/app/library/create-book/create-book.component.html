@@ -1,0 +1,68 @@
+<div class="creator-container">
+
+    <h3>Insert a Book</h3>
+
+  <mat-card class="custom-card">
+
+      <mat-form-field class="full">
+        <input 
+          matInput 
+          placeholder="Title" 
+          [formControl]="titleControl"
+          [(ngModel)]="book.title"
+          (focus)="toggleForm(true)"
+          required>
+        <mat-error *ngIf="titleControl.hasError('required')">Title can't be empty</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full" *ngIf="fullForm">
+        <input 
+          matInput 
+          placeholder="Description" 
+          [formControl]="descriptionControl"
+          [(ngModel)]="book.description" 
+          required>
+        <mat-error *ngIf="descriptionControl.hasError('required')">Description can't be empty</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full" *ngIf="fullForm">
+        <input 
+          type="number"
+          matInput 
+          placeholder="Price" 
+          [formControl]="priceControl"
+          [(ngModel)]="book.price" 
+          required>
+        <mat-error *ngIf="priceControl.hasError('required')">Price can't be empty</mat-error>
+      </mat-form-field>
+
+      <app-book-category-select-required 
+        class="full" 
+        *ngIf="fullForm"
+        (categoryChanged)="categoryChanged($event)">
+      </app-book-category-select-required>
+
+      <app-book-author-select-required 
+        class="full" 
+        *ngIf="fullForm"
+        (authorChanged)="authorChanged($event)">
+      </app-book-author-select-required>
+      
+      <mat-card-actions *ngIf="fullForm">
+          <button 
+            mat-button 
+            color="primary" 
+            (click)="create()" 
+            [disabled]="!validForm()"> 
+          CREATE 
+        </button>
+          <button 
+            mat-button 
+            (click)="cancel()"> 
+            CANCEL 
+          </button>
+      </mat-card-actions>
+    
+  </mat-card>
+  
+</div>

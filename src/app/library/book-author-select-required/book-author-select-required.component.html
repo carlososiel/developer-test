@@ -1,0 +1,17 @@
+<mat-form-field class="full">
+
+  <mat-select 
+    placeholder="Author" 
+    [(value)]="author"
+    [formControl]="authorControl">
+      <mat-option (click)="changeAuthor()">--</mat-option>
+      <mat-option 
+        *ngFor="let aut of authors" 
+        [value]="aut._id"
+        (click)="changeAuthor()">
+        {{ aut.lastName}}, <strong>{{aut.name}}</strong>
+      </mat-option>
+  </mat-select>
+  <mat-error *ngIf="authorControl.hasError('required')">Author can't be empty</mat-error>
+  
+</mat-form-field>

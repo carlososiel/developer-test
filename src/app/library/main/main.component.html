@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="custom-toolbar">
+
+  <span><a class="logo" routerLink="/library">Library</a></span>
+  <span class="example-spacer"></span>
+  <button class="custom-menu" mat-button [matMenuTriggerFor]="appMenu"><mat-icon>menu</mat-icon> Menu</button>
+  
+</mat-toolbar>
+
+<mat-menu #appMenu = "matMenu">
+  <a mat-menu-item routerLink="/library"> Books </a>
+  <a mat-menu-item routerLink="/authors"> Authors </a>
+  <a mat-menu-item routerLink="/categories"> Categories </a>
+</mat-menu>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

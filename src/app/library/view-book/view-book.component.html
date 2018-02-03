@@ -1,0 +1,67 @@
+<div class="creator-container">
+
+    <h3>View Book</h3>
+
+  <mat-card class="custom-card" *ngIf="book">
+
+    <mat-form-field class="full">
+      <input 
+        matInput 
+        placeholder="Title" 
+        [formControl]="titleControl"
+        [(ngModel)]="book.title"
+        required>
+      <mat-error *ngIf="titleControl.hasError('required')">Title can't be empty</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full">
+      <input 
+        matInput 
+        placeholder="Description" 
+        [formControl]="descriptionControl"
+        [(ngModel)]="book.description" 
+        required>
+      <mat-error *ngIf="descriptionControl.hasError('required')">Description can't be empty</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full">
+      <input 
+        type="number"
+        matInput 
+        placeholder="Price" 
+        [formControl]="priceControl"
+        [(ngModel)]="book.price" 
+        required>
+      <mat-error *ngIf="priceControl.hasError('required')">Price can't be empty</mat-error>
+    </mat-form-field>
+
+    <app-book-category-select-required 
+      [category]="book.category._id"
+      class="full" 
+      (categoryChanged)="categoryChanged($event)">
+    </app-book-category-select-required>
+
+    <app-book-author-select-required 
+      [author]="book.author._id"
+      class="full" 
+      (authorChanged)="authorChanged($event)">
+    </app-book-author-select-required>
+      
+    <mat-card-actions>
+        <button 
+          mat-button 
+          color="primary" 
+          (click)="update()"
+          [disabled]="!validForm()"> 
+          UPDATE 
+        </button>
+    </mat-card-actions>
+    
+  </mat-card>
+
+  <div *ngIf="!book">
+    <app-nothing></app-nothing>
+  </div>
+  
+</div>
+
