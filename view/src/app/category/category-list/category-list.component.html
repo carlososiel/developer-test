@@ -1,0 +1,38 @@
+<div style="margin-bottom: 20px;">
+  <span class="ui header">
+    Category list
+  </span>
+  <button class="ui blue icon button right floated" routerLink="/category/add">
+    <i class="icon plus"></i>
+    Add category
+  </button>
+</div>
+<table class="ui celled table" *ngIf="categories.length">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let category of categories">
+    <td>{{category.name}}</td>
+    <td class="collapsing">
+      <button class="ui icon button mini" [routerLink]="['/category/upd', category._id]">
+        <i class="edit icon"></i>
+      </button>
+      <button class="ui icon button mini red" (click)="delete(category)">
+        <i class="trash icon"></i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div class="ui segment" *ngIf="!categories.length">
+  <p>
+    There are no categories to show</p>
+</div>
+<app-modal-confirm
+  header="Delete category"
+  text="Do you really remove selected category?">
+</app-modal-confirm>

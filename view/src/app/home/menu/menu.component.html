@@ -1,0 +1,13 @@
+<div class="ui inverted menu">
+  <div class="ui container">
+    <a class="red item" ngClass="{{(currentRoute === '/book' || currentRoute === '/book/add' || currentRoute === '/book/upd') ? 'active': ''}}" routerLink="/book">
+      <i class="book icon"></i>
+      Books</a>
+    <a class="red item"  ngClass="{{(currentRoute === '/author' || currentRoute === '/author/add' || currentRoute === '/author/upd') ? 'active': ''}}" routerLink="/author">
+      <i class="edit icon"></i> Authors
+    </a>
+    <a class="red item" ngClass="{{(currentRoute === '/category' || currentRoute === '/category/add' || currentRoute === '/category/upd') ? 'active': ''}}" routerLink="/category">
+      <i class="inbox icon"></i> Categories
+    </a>
+  </div>
+</div>

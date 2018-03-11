@@ -1,0 +1,19 @@
+<div>
+  <span class="ui header">
+    Author add
+  </span>
+  <button class="ui green button right floated" (click)="save()">
+    <i class="icon check"></i>
+    Accept
+  </button>
+  <button class="ui red button right floated" routerLink="/author">
+    <i class="icon remove"></i>
+    Cancel
+  </button>
+</div>
+<form class="ui form">
+  <div class="field">
+    <label>Name</label>
+    <input type="text" name="name" [(ngModel)]="author.name">
+  </div>
+</form>

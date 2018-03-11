@@ -1,0 +1,8 @@
+div.ui.menu, div.ui.menu .item.active {
+  border-radius: 0;
+}
+
+app-menu .menu{
+  height: 70px;
+  margin-bottom: 20px !important;
+}
