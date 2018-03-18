@@ -1,0 +1,20 @@
+@import '~font-awesome/css/font-awesome.min.css';
+@import '~uikit/dist/css/uikit.min.css';
+
+.uk-fsize-21rem {
+	font-size: 21rem;
+	text-shadow: 3px 3px 0px yellow;
+}
+
+.uk-404 {
+	position: absolute;
+	left: 43%;
+	top: 26%;
+	font-size: 1.5rem;
+}
+
+.uk-button-aligned {
+	bottom: 4px !important;
+	position: relative !important;
+	margin-left: 21px !important;
+}

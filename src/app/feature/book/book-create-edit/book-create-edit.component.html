@@ -1,0 +1,53 @@
+<!-- section title -->
+<h2 class="uk-heading-bullet uk-text-uppercase">
+  <ng-container *ngIf="routeId; else add"><span>Edit Book</span></ng-container>
+  <ng-template #add><span>Add New Book</span></ng-template>
+</h2>
+
+<hr>
+
+<form class="uk-grid uk-grid-small uk-form-stacked" (ngSubmit)="routeId ? updateBook() : saveBook()" #bookForm="ngForm" uk-grid>
+  
+  <div class="uk-width-1-4@s">
+    <label for="isbn" class="uk-form-label">ISBN</label>
+    <input id="isbn" class="uk-input" [(ngModel)]="book.isbn" name="isbn" required>
+  </div>
+  
+  <div class="uk-width-1-4@s">
+    <label for="title" class="uk-form-label">Title</label>
+    <input id="title" class="uk-input" [(ngModel)]="book.title" name="title" required>
+  </div>
+  
+  <div class="uk-width-1-2@s">
+    <label for="author" class="uk-form-label">Author</label>
+    <select id="author" class="uk-select uk-width-1-2@s" [(ngModel)]="book.author" name="author">
+      <option *ngFor="let item of authors" [value]="item.lastname + ', ' + item.name">
+        {{ item.lastname + ', ' + item.name}}
+      </option>
+    </select>
+  </div>
+
+  <div class="uk-width-1-4@s">
+    <label for="published_year" class="uk-form-label">Published Year</label>
+    <input id="published_year" class="uk-input" type="number" [(ngModel)]="book.published_year" name="published_year" required>
+  </div>
+
+  <div class="uk-width-1-4@s">
+    <label for="publisher" class="uk-form-label">Publisher</label>
+    <input id="publisher" class="uk-input" [(ngModel)]="book.publisher" name="publisher" required>
+  </div>
+
+  <div class="uk-width-1-2@s">
+    <label for="category" class="uk-form-label">Category</label>
+    <select id="category" class="uk-select uk-width-1-2@s" [(ngModel)]="book.category" name="category" required>
+      <option *ngFor="let item of categories" [value]="item.name">{{ item.name }}</option>
+    </select>
+  </div>
+
+  <!-- form submit -->
+  <div class="uk-margin uk-width-1-1">
+    <a class="uk-button uk-button-default" [routerLink]="['/books']">Cancel</a>
+    <button type="submit" class="uk-button uk-button-primary" [disabled]="!bookForm.valid">Save</button>
+  </div>
+
+</form>
