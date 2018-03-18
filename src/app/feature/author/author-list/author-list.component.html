@@ -1,0 +1,34 @@
+<!-- section title -->
+<h2 class="uk-heading-bullet uk-text-uppercase">
+  <span>Author List</span>
+  <a class="uk-button uk-button-primary uk-button-small uk-button-aligned" [routerLink]="['add']">add</a>
+</h2>
+
+<!-- section content -->
+<div class="uk-card uk-card-default uk-padding-small">
+  <table class="uk-table uk-table-divider">
+    <thead>
+      <tr>
+        <th *ngFor="let column of displayedColumns">{{ column }}</th>
+        <th class="uk-text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let author of authors">
+        <td>{{ author.name }}</td>
+        <td>{{ author.lastname }}</td>
+        <td>{{ author.updated_date | date }}</td>
+        <td class="uk-text-center">
+          <!-- edit book -->
+          <a class="uk-button uk-button-primary uk-button-small" [routerLink]="['/authors/edit', author?._id]">
+            <i class="fa fa-edit"></i>
+          </a>
+          <!-- delete book -->
+          <a class="uk-button uk-button-danger uk-button-small" (click)="deleteAuthor(author?._id)">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

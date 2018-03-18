@@ -1,0 +1,53 @@
+<!-- section title -->
+<h2 class="uk-heading-bullet uk-text-uppercase">
+  <span>Book List</span>
+  <a class="uk-button uk-button-primary uk-button-small uk-button-aligned" [routerLink]="['add']">add</a>
+</h2>
+
+<div class="uk-padding-small uk-text-right">
+  <span class="uk-text-uppercase uk-padding-small uk-text-bold">filter by</span>
+  <!-- author filter -->
+  <select class="uk-select uk-width-1-5@s" [(ngModel)]="selectedAuthor">
+    <option [value]="null">Select an Actor...</option>
+    <option *ngFor="let item of authors" [value]="item.lastname + ', ' + item.name">
+      {{ item.lastname + ', ' + item.name}}
+    </option>
+  </select>
+  <!-- category filter -->
+  <select class="uk-select uk-width-1-5@s" [(ngModel)]="selectedCategory">
+    <option [value]="null">Select a Category...</option>
+    <option *ngFor="let item of categories" [value]="item.name">{{ item.name }}</option>
+  </select>
+</div>
+
+<!-- section content -->
+<div class="uk-card uk-card-default uk-padding-small">
+  <table class="uk-table uk-table-divider">
+    <thead>
+      <tr>
+        <th *ngFor="let column of displayedColumns">{{ column }}</th>
+        <th class="uk-text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books | authorCategoryFilter:selectedAuthor:selectedCategory">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.category }}</td>
+        <td>{{ book.isbn }}</td>
+        <td>{{ book.publisher }} &copy; {{ book.published_year }}</td>
+        <td>{{ book.updated_date | date }}</td>
+        <td class="uk-text-center">
+          <!-- edit book -->
+          <a class="uk-button uk-button-primary uk-button-small" [routerLink]="['/books/edit', book?._id]">
+            <i class="fa fa-edit"></i>
+          </a>
+          <!-- delete book -->
+          <a class="uk-button uk-button-danger uk-button-small" (click)="deleteBook(book?._id)">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

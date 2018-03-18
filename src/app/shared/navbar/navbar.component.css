@@ -1,0 +1,7 @@
+.uk-navbar-container:not(.uk-navbar-transparent) {
+	background: none !important;
+}
+
+.uk-container.uk-container-expand {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}

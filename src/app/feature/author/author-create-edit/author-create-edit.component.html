@@ -1,0 +1,27 @@
+<!-- section title -->
+<h2 class="uk-heading-bullet uk-text-uppercase">
+  <ng-container *ngIf="routeId; else add"><span>Edit Author</span></ng-container>
+  <ng-template #add><span>Add New Author</span></ng-template>
+</h2>
+
+<hr>
+
+<form class="uk-grid uk-grid-small uk-form-stacked" (ngSubmit)="routeId ? updateAuthor() : saveAuthor()" #authorForm="ngForm" uk-grid>
+  
+  <div class="uk-width-1-4@s">
+    <label for="name" class="uk-form-label">Name</label>
+    <input id="name" class="uk-input" [(ngModel)]="author.name" name="name" required>
+  </div>
+
+  <div class="uk-width-1-4@s">
+    <label for="lastname" class="uk-form-label">Lastname</label>
+    <input id="lastname" class="uk-input" [(ngModel)]="author.lastname" name="lastname" required>
+  </div>
+
+  <!-- form submit -->
+  <div class="uk-margin uk-width-1-1">
+    <a class="uk-button uk-button-default" [routerLink]="['/authors']">Cancel</a>
+    <button type="submit" class="uk-button uk-button-primary" [disabled]="!authorForm.valid">Save</button>
+  </div>
+
+</form>

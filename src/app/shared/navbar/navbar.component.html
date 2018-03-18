@@ -1,0 +1,14 @@
+<div className="uk-section-primary uk-preserve-color">
+  <div class="uk-container uk-container-expand">
+    <nav class="uk-navbar-container" uk-navbar>
+      <div class="uk-navbar-left"><a class="uk-navbar-item uk-logo" href="#">Library</a></div>
+      <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+          <li *ngFor="let route of routes">
+            <a [routerLink]="['/' + route.url]">{{ route.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

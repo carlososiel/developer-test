@@ -1,0 +1,22 @@
+<!-- section title -->
+<h2 class="uk-heading-bullet uk-text-uppercase">
+  <ng-container *ngIf="routeId; else add"><span>Edit Category</span></ng-container>
+  <ng-template #add><span>Add New Category</span></ng-template>
+</h2>
+
+<hr>
+
+<form class="uk-grid uk-grid-small uk-form-stacked" (ngSubmit)="routeId ? updateCategory() : saveCategory()" #categoryForm="ngForm" uk-grid>
+  
+  <div class="uk-width-1-4@s">
+    <label for="name" class="uk-form-label">Name</label>
+    <input id="name" class="uk-input" [(ngModel)]="category.name" name="name" required>
+  </div>
+
+  <!-- form submit -->
+  <div class="uk-margin uk-width-1-1">
+    <a class="uk-button uk-button-default" [routerLink]="['/categories']">Cancel</a>
+    <button type="submit" class="uk-button uk-button-primary" [disabled]="!categoryForm.valid">Save</button>
+  </div>
+
+</form>
