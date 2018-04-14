@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var Author = mongoose.model('Author', {
+var AuthorSchema = new Schema({
     firstName: {
         type: String,
         required: true,
@@ -13,4 +13,8 @@ var Author = mongoose.model('Author', {
     }
 });
 
-module.exports = { Author };
+var Author = mongoose.model('Author', AuthorSchema);
+
+module.exports = {
+    Author
+};

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var Category = mongoose.model('Category', {
+var CategorySchema = new CategorySchema({
     code: {
         type: String,
         required: true,
@@ -13,4 +13,8 @@ var Category = mongoose.model('Category', {
     }
 });
 
-module.exports = { Category };
+var Category = mongoose.model('Category', CategorySchema);
+
+module.exports = {
+    Category
+};
