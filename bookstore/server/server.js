@@ -36,8 +36,6 @@ app.use((request, response, next)=>{
   * CREATE
   */
 app.post('/books', (request, response) => {
-    console.log(request.body);
-
     var book = new Book({
         title: request.body.title,
         description: request.body.description
@@ -150,7 +148,6 @@ app.patch('/books/:id', (request, response) => {
  * CREATE
  */
 app.post('/authors', (request, response) => {
-   console.log(request.body);
 
    var author = new Author({
        firstName: request.body.firstName,
@@ -264,8 +261,6 @@ app.patch('/authors/:id', (request, response) => {
  * CREATE
  */
 app.post('/categories', (request, response) => {
-    console.log(request.body);
- 
     var category = new Category({
         code: request.body.code,
         description: request.body.description
