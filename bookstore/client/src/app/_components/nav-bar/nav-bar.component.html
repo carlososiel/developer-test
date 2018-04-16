@@ -1,16 +1,12 @@
 <nav>
-  <ul>
-      <li>
-        <a routerLink="home">Home</a>
-      </li>
-      <li>
-        <a routerLink="book/list">Book</a>
-      </li>
-      <li>
-        <a routerLink="author/list">Author</a>
-      </li>
-      <li>
-        <a routerLink="category/list">Category</a>
-      </li>
-  </ul>
+  <mat-toolbar color="primary">
+    <span>Bookstore</span>
+    <span style="flex: 1 1 auto"></span>
+    <div class="button-row">
+      <a routerLink="home" routerLinkActive="primary" mat-button>Home</a>
+      <a routerLink="book/list" mat-button>Book</a>
+      <a routerLink="category/list" mat-button>Category</a>
+      <a routerLink="author/list" mat-button>Author</a>
+    </div>
+  </mat-toolbar>
 </nav>
