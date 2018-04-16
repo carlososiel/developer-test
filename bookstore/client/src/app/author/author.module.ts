@@ -1,14 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { AuthorListComponent } from './author-list/author-list.component';
-import { AuthorRoutingModule } from './author-routing.module';
+import {AuthorListComponent} from './author-list/author-list.component';
+import {AuthorRoutingModule} from './author-routing.module';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    AuthorRoutingModule
+    AuthorRoutingModule,
+    SharedModule
   ],
   declarations: [AuthorListComponent]
 })
-export class AuthorModule { }
+export class AuthorModule {
+}
