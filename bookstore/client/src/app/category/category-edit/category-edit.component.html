@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Edit category</h2>
+
+<mat-dialog-content>
+  <mat-form-field><input matInput placeholder="Code" [(ngModel)]="category.code"></mat-form-field>
+  <br>
+  <mat-form-field><input matInput placeholder="Description" [(ngModel)]="category.description"/></mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="closeDialog()">Close</button>
+  <button class="mat-raised-button mat-primary" (click)="saveDialog()">Save</button>
+</mat-dialog-actions>

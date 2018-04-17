@@ -5,9 +5,9 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import { HomeComponent } from './_components/home/home.component';
-import { NavBarComponent } from './_components/nav-bar/nav-bar.component';
-import { SharedModule } from './shared/shared.module';
+import {HomeComponent} from './_components/home/home.component';
+import {NavBarComponent} from './_components/nav-bar/nav-bar.component';
+import {SharedModule} from './shared/shared.module';
 
 
 @NgModule({

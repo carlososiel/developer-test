@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatTableDataSource} from '@angular/material';
 
 import {CrudService} from '../../_services/crud.service';
 import {CategoryCrudService} from '../category-crud.service';
+import {ConfirmationDialogComponent} from '../../_components/confirmation-dialog/confirmation-dialog.component';
+import {CategoryEditComponent} from '../category-edit/category-edit.component';
 
 @Component({
   selector: 'app-category-list',
@@ -15,12 +17,97 @@ export class CategoryListComponent implements OnInit {
   displayedColumns = [];
   dataSource: MatTableDataSource<{}>;
 
-  constructor(private crudService: CrudService) {
+  constructor(private crudService: CrudService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.displayedColumns = this.crudService.getDisplayedColumns();
     this.displayedColumns.push('options');
+
+    this.loadDataSource();
+  }
+
+  openNewDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {code: '', description: ''};
+    const dialogReference = this.dialog.open(CategoryEditComponent, dialogConfig);
+
+    dialogReference.afterClosed().subscribe(
+      data => {
+        if (!data) {
+          return;
+        }
+        this.crudService.save(data)
+          .subscribe(
+            () => {
+              this.loadDataSource();
+            },
+            (error) => {
+              console.log((error));
+            }
+          );
+      }
+    );
+
+  }
+
+  openEditDialog(id: string) {
+    this.crudService.getById(id).subscribe(
+      (response) => {
+        const category = JSON.parse(response['_body']).result;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = category;
+        const dialogReference = this.dialog.open(CategoryEditComponent, dialogConfig);
+
+        dialogReference.afterClosed().subscribe(
+          data => {
+            if (!data) {
+              return;
+            }
+            this.crudService.update(data)
+              .subscribe(
+                () => {
+                  this.loadDataSource();
+                },
+                (error) => {
+                  console.log((error));
+                }
+              );
+          }
+        );
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+
+  openDeleteDialog(id: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {text: 'Are you sure you want to delete this element?'};
+    const dialogReference = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+
+    dialogReference.afterClosed().subscribe(
+      data => {
+        if (!data) {
+          return;
+        } else {
+          this.crudService.delete(id).subscribe(
+            () => {
+              this.loadDataSource();
+            }
+          );
+        }
+      }
+    );
+  }
+
+  loadDataSource() {
 
     this.crudService.getAll()
       .subscribe(
@@ -31,6 +118,8 @@ export class CategoryListComponent implements OnInit {
           console.log(error);
         }
       );
+
   }
+
 
 }

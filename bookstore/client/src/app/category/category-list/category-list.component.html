@@ -2,8 +2,8 @@
 
   <mat-toolbar>
     <h3>Categories list</h3>
-    <span style="flex: 1 1 auto;"></span>
-    <a routerLink="category/new" mat-raised-button color="primary">New</a>
+    <span class="toolbar-spacer"></span>
+    <button mat-raised-button color="primary" (click)="openNewDialog()">New</button>
   </mat-toolbar>
 
   <mat-card-content>
@@ -24,8 +24,19 @@
         <mat-header-cell *matHeaderCellDef>Options</mat-header-cell>
         <mat-cell *matCellDef="let category">
           <div class="button-row">
-            <a routerLink="category/edit/{{category._id}}" mat-raised-button>Edit</a>
-            <a routerLink="category/delete/{{category._id}}" mat-raised-button color="warn">Delete</a>
+            <button
+              [class.mat-elevation-z8]="true"
+              mat-raised-button
+              (click)="openEditDialog(category._id)">
+              Edit
+            </button>
+            <button
+              [class.mat-elevation-z8]="true"
+              mat-raised-button
+              color="warn"
+              (click)="openDeleteDialog(category._id)">
+              Delete
+            </button>
           </div>
         </mat-cell>
       </ng-container>
