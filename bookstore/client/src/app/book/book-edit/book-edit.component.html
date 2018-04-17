@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Edit book</h2>
+
+<mat-dialog-content>
+  <mat-form-field><input matInput placeholder="Title" [(ngModel)]="book.title"></mat-form-field>
+  <br/>
+  <mat-form-field><textarea matInput placeholder="Description" [(ngModel)]="book.description"></textarea>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <mat-select placeholder="Author" [(ngModel)]="book.author" name="food">
+      <mat-option *ngFor="let author of authors" [value]="author._id">
+        {{author.firstName + ' ' + author.lastName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <mat-select placeholder="Category" [(ngModel)]="book.category" name="food">
+      <mat-option *ngFor="let category of categories" [value]="category._id">
+        {{category.code}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="closeDialog()">Close</button>
+  <button class="mat-raised-button mat-primary" (click)="saveDialog()">Save</button>
+</mat-dialog-actions>

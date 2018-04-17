@@ -11,6 +11,6 @@ export class BookCrudService extends CrudService {
   }
 
   getDisplayedColumns() {
-    return ['title', 'description'];
+    return ['title', 'description', 'author', 'category'];
   }
 }
