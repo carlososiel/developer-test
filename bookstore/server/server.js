@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const {
     ObjectID
@@ -20,25 +21,23 @@ var {
 
 var app = express();
 
-app.use(bodyParser.json());
+app.use(cors());
 
-app.use((request, response, next)=>{
-    response.header('Access-Control-Allow-Origin', '*');
-    response.header('Acces-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+app.use(bodyParser.json());
 
 /**
  * BOOK MODEL ENDPOINTS
  */
 
- /**
-  * CREATE
-  */
+/**
+ * CREATE
+ */
 app.post('/books', (request, response) => {
     var book = new Book({
         title: request.body.title,
-        description: request.body.description
+        description: request.body.description,
+        author: request.body.author,
+        category: request.body.category
     });
 
     book.save().then((result) => {
@@ -52,7 +51,7 @@ app.post('/books', (request, response) => {
  * READ ALL
  */
 app.get('/books', (request, response) => {
-    Book.find().then((result) => {
+    Book.find().populate('author').populate('category').then((result) => {
         response.send({
             result
         });
@@ -108,14 +107,15 @@ app.delete('/books/:id', (request, response) => {
     });
 
 
-}, (error) => {});
+}, (error) => {
+});
 
 /**
  * UPDATE
  */
 app.patch('/books/:id', (request, response) => {
     var id = request.params.id;
-    var body = _.pick(request.body, ['title', 'description']);
+    var body = _.pick(request.body, ['title', 'description', 'author', 'category']);
 
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
@@ -149,108 +149,109 @@ app.patch('/books/:id', (request, response) => {
  */
 app.post('/authors', (request, response) => {
 
-   var author = new Author({
-       firstName: request.body.firstName,
-       lastName: request.body.lastName
-   });
+    var author = new Author({
+        firstName: request.body.firstName,
+        lastName: request.body.lastName
+    });
 
-   author.save().then((result) => {
-       response.send(result);
-   }, (error) => {
-       response.status(400).send(error);
-   });
+    author.save().then((result) => {
+        response.send(result);
+    }, (error) => {
+        response.status(400).send(error);
+    });
 });
 
 /**
-* READ ALL
-*/
+ * READ ALL
+ */
 app.get('/authors', (request, response) => {
-   Author.find().then((result) => {
-       response.send({
-           result
-       });
-   }, (error) => {
-       response.status(400).send(error);
-   })
+    Author.find().then((result) => {
+        response.send({
+            result
+        });
+    }, (error) => {
+        response.status(400).send(error);
+    })
 });
 
 /**
-* READ ONE
-*/
+ * READ ONE
+ */
 app.get('/authors/:id', (request, response) => {
-   var id = request.params.id;
+    var id = request.params.id;
 
-   if (!ObjectID.isValid(id)) {
-       return response.status(400).send();
-   }
+    if (!ObjectID.isValid(id)) {
+        return response.status(400).send();
+    }
 
-   Author.findById(id).then((result) => {
-       if (!result) {
-           return response.status(404).send();
-       }
+    Author.findById(id).then((result) => {
+        if (!result) {
+            return response.status(404).send();
+        }
 
-       response.send({
-           result
-       });
-   }, (error) => {
-       response.status(400).send();
-   })
+        response.send({
+            result
+        });
+    }, (error) => {
+        response.status(400).send();
+    })
 
 });
 
 /**
-* DELETE
-*/
+ * DELETE
+ */
 app.delete('/authors/:id', (request, response) => {
-   var id = request.params.id;
+    var id = request.params.id;
 
-   if (!ObjectID.isValid(id)) {
-       return response.status(400).send();
-   }
+    if (!ObjectID.isValid(id)) {
+        return response.status(400).send();
+    }
 
-   Author.findByIdAndRemove(id).then((result) => {
-       if (!result) {
-           return response.status(404).send();
-       }
+    Author.findByIdAndRemove(id).then((result) => {
+        if (!result) {
+            return response.status(404).send();
+        }
 
-       response.send({
-           result
-       });
-   }, (error) => {
-       response.status(400).send();
-   });
+        response.send({
+            result
+        });
+    }, (error) => {
+        response.status(400).send();
+    });
 
 
-}, (error) => {});
+}, (error) => {
+});
 
 /**
-* UPDATE
-*/
+ * UPDATE
+ */
 app.patch('/authors/:id', (request, response) => {
-   var id = request.params.id;
-   var body = _.pick(request.body, ['firstName', 'lastName']);
+    var id = request.params.id;
+    var body = _.pick(request.body, ['firstName', 'lastName']);
 
-   if (!ObjectID.isValid(id)) {
-       return response.status(400).send();
-   }
+    if (!ObjectID.isValid(id)) {
+        return response.status(400).send();
+    }
 
-   Auhtor.findByIdAndUpdate(id, {
-       $set: body
-   }, {
-       new: true
-   }).then((result) => {
-       if (!result) {
-           response.status(404).send();
-       }
+    Author.findByIdAndUpdate(id, {
+        $set: body
+    }, {
+        new: true
+    }).then((result) => {
+        if (!result) {
+            response.status(404).send();
+        }
 
-       response.send({
-           result
-       });
-   }, (error) => {
-       response.status(400).send();
-   });
+        response.send({
+            result
+        });
+    }, (error) => {
+        response.status(400).send();
+    });
 }, (error) => {
-   response.status(400).send();
+    response.status(400).send();
 });
 
 /**
@@ -265,18 +266,18 @@ app.post('/categories', (request, response) => {
         code: request.body.code,
         description: request.body.description
     });
- 
+
     category.save().then((result) => {
         response.send(result);
     }, (error) => {
         response.status(400).send(error);
     });
- });
- 
- /**
+});
+
+/**
  * READ ALL
  */
- app.get('/categories', (request, response) => {
+app.get('/categories', (request, response) => {
     Category.find().then((result) => {
         response.send({
             result
@@ -284,68 +285,69 @@ app.post('/categories', (request, response) => {
     }, (error) => {
         response.status(400).send(error);
     })
- });
- 
- /**
+});
+
+/**
  * READ ONE
  */
- app.get('/categories/:id', (request, response) => {
+app.get('/categories/:id', (request, response) => {
     var id = request.params.id;
- 
+
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
     }
- 
+
     Category.findById(id).then((result) => {
         if (!result) {
             return response.status(404).send();
         }
- 
+
         response.send({
             result
         });
     }, (error) => {
         response.status(400).send();
     })
- 
- });
- 
- /**
+
+});
+
+/**
  * DELETE
  */
- app.delete('/categories/:id', (request, response) => {
+app.delete('/categories/:id', (request, response) => {
     var id = request.params.id;
- 
+
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
     }
- 
+
     Category.findByIdAndRemove(id).then((result) => {
         if (!result) {
             return response.status(404).send();
         }
- 
+
         response.send({
             result
         });
     }, (error) => {
         response.status(400).send();
     });
- 
- 
- }, (error) => {});
- 
- /**
+
+
+}, (error) => {
+});
+
+/**
  * UPDATE
  */
- app.patch('/categories/:id', (request, response) => {
+app.patch('/categories/:id', (request, response) => {
     var id = request.params.id;
     var body = _.pick(request.body, ['code', 'description']);
- 
+
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
     }
- 
+
     Category.findByIdAndUpdate(id, {
         $set: body
     }, {
@@ -354,18 +356,16 @@ app.post('/categories', (request, response) => {
         if (!result) {
             response.status(404).send();
         }
- 
+
         response.send({
             result
         });
     }, (error) => {
         response.status(400).send();
     });
- }, (error) => {
+}, (error) => {
     response.status(400).send();
- });
- 
-
+});
 
 
 app.listen(3000, () => {

@@ -15,7 +15,12 @@ var BookSchema = new Schema({
         trim: true
     },
     author: {
-        type: String
+        type: Schema.Types.ObjectId,
+        ref: 'Author'
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category'
     }
 });
 
