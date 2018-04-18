@@ -7,15 +7,15 @@
   </mat-form-field>
   <br/>
   <mat-form-field>
-    <mat-select placeholder="Author" [(ngModel)]="book.author" name="food">
+    <mat-select placeholder="Author" [(ngModel)]="book.author">
       <mat-option *ngFor="let author of authors" [value]="author._id">
-        {{author.firstName + ' ' + author.lastName}}
+        {{author.lastName + ', ' + author.firstName}}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <br/>
   <mat-form-field>
-    <mat-select placeholder="Category" [(ngModel)]="book.category" name="food">
+    <mat-select placeholder="Category" [(ngModel)]="book.category">
       <mat-option *ngFor="let category of categories" [value]="category._id">
         {{category.code}}
       </mat-option>

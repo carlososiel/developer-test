@@ -8,7 +8,7 @@ export abstract class CrudService {
 
   protected model = '';
 
-  protected constructor(private http: Http) {
+  protected constructor(protected http: Http) {
   }
 
   getAll(): Observable<any> {

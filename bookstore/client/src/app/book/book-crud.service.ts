@@ -10,6 +10,10 @@ export class BookCrudService extends CrudService {
     this.model = 'books';
   }
 
+  getAllByFilter(filter: any) {
+    return this.http.post(this.url + this.model + '/filter', filter);
+  }
+
   getDisplayedColumns() {
     return ['title', 'description', 'author', 'category'];
   }

@@ -85,6 +85,26 @@ app.get('/books/:id', (request, response) => {
 });
 
 /**
+ * READ ALL BY FILTER
+ */
+app.post('/books/filter', (request, response) => {
+    var body = _.pick(request.body, ['author', 'category']);
+
+    Book.find(body).populate('author').populate('category').then((result) => {
+        if (!result) {
+            return response.status(404).send();
+        }
+
+        response.send({
+            result
+        });
+    }, (error) => {
+        response.status(400).send();
+    })
+
+});
+
+/**
  * DELETE
  */
 app.delete('/books/:id', (request, response) => {
