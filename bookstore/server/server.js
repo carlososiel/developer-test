@@ -1,4 +1,4 @@
-const _ = require('lodash')
+const _ = require('lodash');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -6,20 +6,20 @@ const {
     ObjectID
 } = require('mongodb');
 
-var {
+const {
     mongoose
 } = require('./db/mongoose');
-var {
+const {
     Book
 } = require('./models/book');
-var {
+const {
     Author
 } = require('./models/author');
-var {
+const {
     Category
 } = require('./models/category');
 
-var app = express();
+const app = express();
 
 app.use(cors());
 
@@ -33,7 +33,8 @@ app.use(bodyParser.json());
  * CREATE
  */
 app.post('/books', (request, response) => {
-    var book = new Book({
+
+    const book = new Book({
         title: request.body.title,
         description: request.body.description,
         author: request.body.author,
@@ -64,7 +65,7 @@ app.get('/books', (request, response) => {
  * READ ONE
  */
 app.get('/books/:id', (request, response) => {
-    var id = request.params.id;
+    const id = request.params.id;
 
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
@@ -88,7 +89,8 @@ app.get('/books/:id', (request, response) => {
  * READ ALL BY FILTER
  */
 app.post('/books/filter', (request, response) => {
-    var body = _.pick(request.body, ['author', 'category']);
+
+    const body = _.pick(request.body, ['author', 'category']);
 
     Book.find(body).populate('author').populate('category').then((result) => {
         if (!result) {
@@ -108,7 +110,7 @@ app.post('/books/filter', (request, response) => {
  * DELETE
  */
 app.delete('/books/:id', (request, response) => {
-    var id = request.params.id;
+    const id = request.params.id;
 
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
@@ -134,8 +136,8 @@ app.delete('/books/:id', (request, response) => {
  * UPDATE
  */
 app.patch('/books/:id', (request, response) => {
-    var id = request.params.id;
-    var body = _.pick(request.body, ['title', 'description', 'author', 'category']);
+    const id = request.params.id;
+    const body = _.pick(request.body, ['title', 'description', 'author', 'category']);
 
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
@@ -150,9 +152,7 @@ app.patch('/books/:id', (request, response) => {
             response.status(404).send();
         }
 
-        response.send({
-            result
-        });
+        response.send({result});
     }, (error) => {
         response.status(400).send();
     });
@@ -169,7 +169,7 @@ app.patch('/books/:id', (request, response) => {
  */
 app.post('/authors', (request, response) => {
 
-    var author = new Author({
+    const author = new Author({
         firstName: request.body.firstName,
         lastName: request.body.lastName
     });
@@ -198,7 +198,7 @@ app.get('/authors', (request, response) => {
  * READ ONE
  */
 app.get('/authors/:id', (request, response) => {
-    var id = request.params.id;
+    const id = request.params.id;
 
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
@@ -222,7 +222,7 @@ app.get('/authors/:id', (request, response) => {
  * DELETE
  */
 app.delete('/authors/:id', (request, response) => {
-    var id = request.params.id;
+    const id = request.params.id;
 
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
@@ -248,8 +248,8 @@ app.delete('/authors/:id', (request, response) => {
  * UPDATE
  */
 app.patch('/authors/:id', (request, response) => {
-    var id = request.params.id;
-    var body = _.pick(request.body, ['firstName', 'lastName']);
+    const id = request.params.id;
+    const body = _.pick(request.body, ['firstName', 'lastName']);
 
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
@@ -282,7 +282,7 @@ app.patch('/authors/:id', (request, response) => {
  * CREATE
  */
 app.post('/categories', (request, response) => {
-    var category = new Category({
+    const category = new Category({
         code: request.body.code,
         description: request.body.description
     });
@@ -311,7 +311,7 @@ app.get('/categories', (request, response) => {
  * READ ONE
  */
 app.get('/categories/:id', (request, response) => {
-    var id = request.params.id;
+    const id = request.params.id;
 
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
@@ -335,7 +335,7 @@ app.get('/categories/:id', (request, response) => {
  * DELETE
  */
 app.delete('/categories/:id', (request, response) => {
-    var id = request.params.id;
+    const id = request.params.id;
 
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
@@ -361,8 +361,8 @@ app.delete('/categories/:id', (request, response) => {
  * UPDATE
  */
 app.patch('/categories/:id', (request, response) => {
-    var id = request.params.id;
-    var body = _.pick(request.body, ['code', 'description']);
+    const id = request.params.id;
+    const body = _.pick(request.body, ['code', 'description']);
 
     if (!ObjectID.isValid(id)) {
         return response.status(400).send();
