@@ -1,9 +1,11 @@
-<h2 mat-dialog-title>Edit author</h2>
+<h2 mat-dialog-title>{{isAdd ? 'Add' : 'Edit'}} author</h2>
 
 <mat-dialog-content>
   <mat-form-field><input matInput placeholder="FirstName" [(ngModel)]="author.firstName"></mat-form-field>
+  <mat-error *ngIf="errors.firstName">{{errors.firstName.message}}</mat-error>
   <br>
   <mat-form-field><input matInput placeholder="LastName" [(ngModel)]="author.lastName"/></mat-form-field>
+  <mat-error *ngIf="errors.lastName">{{errors.lastName.message}}</mat-error>
 </mat-dialog-content>
 
 <mat-dialog-actions>

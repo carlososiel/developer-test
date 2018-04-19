@@ -56,7 +56,7 @@ export class BookListComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {title: '', description: '', author: '', category: ''};
+    dialogConfig.data = {object: {title: '', description: '', author: '', category: ''}, isAdd: true};
     const dialogReference = this.dialog.open(BookEditComponent, dialogConfig);
 
     dialogReference.afterClosed().subscribe(
@@ -64,15 +64,7 @@ export class BookListComponent implements OnInit {
         if (!data) {
           return;
         }
-        this.bookCrudService.save(data)
-          .subscribe(
-            () => {
-              this.loadDataSource();
-            },
-            (error) => {
-              console.log((error));
-            }
-          );
+        this.loadDataSource();
       }
     );
 
@@ -85,7 +77,7 @@ export class BookListComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.data = book;
+        dialogConfig.data = {object: book, isAdd: false};
         const dialogReference = this.dialog.open(BookEditComponent, dialogConfig);
 
         dialogReference.afterClosed().subscribe(
@@ -93,15 +85,7 @@ export class BookListComponent implements OnInit {
             if (!data) {
               return;
             }
-            this.bookCrudService.update(data)
-              .subscribe(
-                () => {
-                  this.loadDataSource();
-                },
-                (error) => {
-                  console.log((error));
-                }
-              );
+            this.loadDataSource();
           }
         );
       },

@@ -31,7 +31,7 @@ export class CategoryListComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {code: '', description: ''};
+    dialogConfig.data = {object: {code: '', description: ''}, isAdd: true};
     const dialogReference = this.dialog.open(CategoryEditComponent, dialogConfig);
 
     dialogReference.afterClosed().subscribe(
@@ -39,15 +39,7 @@ export class CategoryListComponent implements OnInit {
         if (!data) {
           return;
         }
-        this.crudService.save(data)
-          .subscribe(
-            () => {
-              this.loadDataSource();
-            },
-            (error) => {
-              console.log((error));
-            }
-          );
+        this.loadDataSource();
       }
     );
 
@@ -60,7 +52,8 @@ export class CategoryListComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.data = category;
+        dialogConfig.data = {object: category, isAdd: false};
+        ;
         const dialogReference = this.dialog.open(CategoryEditComponent, dialogConfig);
 
         dialogReference.afterClosed().subscribe(
@@ -68,15 +61,7 @@ export class CategoryListComponent implements OnInit {
             if (!data) {
               return;
             }
-            this.crudService.update(data)
-              .subscribe(
-                () => {
-                  this.loadDataSource();
-                },
-                (error) => {
-                  console.log((error));
-                }
-              );
+            this.loadDataSource();
           }
         );
       },

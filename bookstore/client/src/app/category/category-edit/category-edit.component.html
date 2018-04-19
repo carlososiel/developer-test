@@ -1,9 +1,11 @@
-<h2 mat-dialog-title>Edit category</h2>
+<h2 mat-dialog-title>{{isAdd ? 'Add' : 'Edit'}} category</h2>
 
 <mat-dialog-content>
   <mat-form-field><input matInput placeholder="Code" [(ngModel)]="category.code"></mat-form-field>
+  <mat-error *ngIf="errors.code">{{errors.code.message}}</mat-error>
   <br>
   <mat-form-field><input matInput placeholder="Description" [(ngModel)]="category.description"/></mat-form-field>
+  <mat-error *ngIf="errors.description">{{errors.description.message}}</mat-error>
 </mat-dialog-content>
 
 <mat-dialog-actions>

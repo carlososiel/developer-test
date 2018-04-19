@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CrudService} from '../../_services/crud.service';
 import {MatDialog, MatDialogConfig, MatTableDataSource} from '@angular/material';
 
@@ -32,7 +32,7 @@ export class AuthorListComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {firstName: '', lastName: ''};
+    dialogConfig.data = {object: {firstName: '', lastName: ''}, isAdd: true};
     const dialogReference = this.dialog.open(AuthorEditComponent, dialogConfig);
 
     dialogReference.afterClosed().subscribe(
@@ -40,15 +40,7 @@ export class AuthorListComponent implements OnInit {
         if (!data) {
           return;
         }
-        this.crudService.save(data)
-          .subscribe(
-            () => {
-              this.loadDataSource();
-            },
-            (error) => {
-              console.log((error));
-            }
-          );
+        this.loadDataSource();
       }
     );
 
@@ -61,7 +53,7 @@ export class AuthorListComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.data = author;
+        dialogConfig.data = {object: author, isAdd: false};
         const dialogReference = this.dialog.open(AuthorEditComponent, dialogConfig);
 
         dialogReference.afterClosed().subscribe(
@@ -69,15 +61,7 @@ export class AuthorListComponent implements OnInit {
             if (!data) {
               return;
             }
-            this.crudService.update(data)
-              .subscribe(
-                () => {
-                  this.loadDataSource();
-                },
-                (error) => {
-                  console.log((error));
-                }
-              );
+            this.loadDataSource();
           }
         );
       },

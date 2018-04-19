@@ -11,7 +11,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  MatOptionModule
+  MatOptionModule, MatError
 } from '@angular/material';
 import {ConfirmationDialogComponent} from '../_components/confirmation-dialog/confirmation-dialog.component';
 

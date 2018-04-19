@@ -1,10 +1,15 @@
-<h2 mat-dialog-title>Edit book</h2>
+<h2 mat-dialog-title>{{isAdd ? 'Add' : 'Edit'}} book</h2>
 
 <mat-dialog-content>
-  <mat-form-field><input matInput placeholder="Title" [(ngModel)]="book.title"></mat-form-field>
-  <br/>
-  <mat-form-field><textarea matInput placeholder="Description" [(ngModel)]="book.description"></textarea>
+  <mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)]="book.title">
   </mat-form-field>
+  <mat-error *ngIf="errors.title">{{errors.title.message}}</mat-error>
+  <br/>
+  <mat-form-field>
+    <textarea matInput placeholder="Description" [(ngModel)]="book.description"></textarea>
+  </mat-form-field>
+  <mat-error *ngIf="errors.description">{{errors.description.message}}</mat-error>
   <br/>
   <mat-form-field>
     <mat-select placeholder="Author" [(ngModel)]="book.author">
@@ -13,6 +18,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-error *ngIf="errors.author">{{errors.author.message}}</mat-error>
   <br/>
   <mat-form-field>
     <mat-select placeholder="Category" [(ngModel)]="book.category">
@@ -21,6 +27,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-error *ngIf="errors.category">{{errors.category.message}}</mat-error>
 </mat-dialog-content>
 
 <mat-dialog-actions>
