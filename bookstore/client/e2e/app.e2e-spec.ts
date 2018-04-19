@@ -1,4 +1,4 @@
-import { AppPage } from './app.po';
+import {AppPage} from './app.po';
 
 describe('bookstore-client App', () => {
   let page: AppPage;
@@ -8,7 +8,7 @@ describe('bookstore-client App', () => {
   });
 
   it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    page.navigateTo('/');
+    expect(page.getParagraphText()).toEqual('Welcome to Bookstore!');
   });
 });
